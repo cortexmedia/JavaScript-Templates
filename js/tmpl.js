@@ -15,7 +15,7 @@
 /*jslint evil: true, regexp: true, unparam: true */
 /*global document, define */
 
-(function ($) {
+(function (w) {
     "use strict";
     var tmpl = function (str, data) {
         var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] ||
@@ -77,11 +77,7 @@
     tmpl.arg = "o";
     tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
         ",include=function(s,d){_s+=tmpl(s,d);}";
-    if (typeof define === "function" && define.amd) {
-        define(function () {
-            return tmpl;
-        });
-    } else {
-        $.tmpl = tmpl;
-    }
-}(this));
+   
+    w["tmpl"] = tmpl;
+    
+})(window);
